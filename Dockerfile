@@ -1,17 +1,9 @@
 FROM python:3.8-slim-buster
 
-ADD requirements.txt /app/requirements.txt
+WORKDIR /app
 
-# COPY requirements.txt /app/requirements.txt
+ADD . .
 
 RUN pip install -r /app/requirements.txt
 
-COPY . /app
-
-# ADD backend /app
-
-WORKDIR /app
-
-ENTRYPOINT [ "python" ]
-
-CMD [ "app.py" ]
+CMD [ "python" "app.py" ]
