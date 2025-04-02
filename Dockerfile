@@ -2,9 +2,13 @@ FROM python:3.8-slim-buster
 
 WORKDIR /app
 
-COPY requirements.txt /app/  
-COPY . /app/                 
+# Copy only requirements.txt first (to prevent caching issues)
+COPY requirements.txt /app/
 
-RUN pip install -r /app/requirements.txt
+# Install dependencies before copying everything
+RUN pip install -r requirements.txt
 
-CMD ["python", "app.py"]  # Change this to your main script
+# Now copy the rest of the app files
+COPY . /app/
+
+CMD ["python", "app.py"]  # Update with your main script
